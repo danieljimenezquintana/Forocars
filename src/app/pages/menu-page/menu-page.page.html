@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Coches</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!--Creación de un nuevo coche-->
+  <ion-item>
+    <ion-label position="fixed">Modelo</ion-label>
+    <ion-input [(ngModel)]="newCarTitle"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">Description</ion-label>
+    <ion-input [(ngModel)]="newCarTitle"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="addCar()">Añadir coche a la lista</ion-button>
+
+  <!--Lista de coches guardados-->
+  <ion-list #mylist>
+  <ion-list-header>
+    <ion-label>Coches guardados</ion-label>
+  </ion-list-header>
+
+  <ion-item-sliding *ngFor="let c of cars">
+  
+    <ion-item>
+      <ion-label text-wrap>
+        <h1>{{ c.model }}</h1>
+        <ion-text>
+          <p>{{ c.description }}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <!--Options-->
+    <ion-item-options side="end">
+      <ion-item-option color="warning" (click)="updateCar(c)">Editar</ion-item-option>
+      <ion-item-option color="danger" (click)="deleteCar(c)">Borrar</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+</ion-content>

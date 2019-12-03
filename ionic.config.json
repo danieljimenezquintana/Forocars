@@ -1,5 +1,7 @@
 {
   "name": "MyListCars",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
