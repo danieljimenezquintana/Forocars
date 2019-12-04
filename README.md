@@ -18,4 +18,4 @@ Deslizando el item del vehículo hacia el lado izquierdo aparecerá una opción 
 
 Si clicamos la flecha de la esquina izquierda superior nos llevará otra vez al login.
 
-Vídeo aclarativo <a href="https://youtu.be/gIFhiSTujqk> aquí </a>.
+Vídeo aclarativo https://youtu.be/gIFhiSTujqk.
