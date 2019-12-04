@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
-export interface Car {
+
+export class Car {
   id: number;
   model: String;
   description: String;
@@ -12,44 +14,24 @@ const CARS_KEY = "my-items";
   providedIn: 'root'
 })
 export class StorageService {
-
-  constructor(private storage: Storage) { }
-  addCar(car: Car): Promise<any> {
-    return this.storage.get(CARS_KEY).then((cars: Car[]) => {
-      if (cars) {
-        cars.push(car);
-        return this.storage.set(CARS_KEY, cars);
-      } else {
-        return this.storage.set(CARS_KEY, cars);
-      }
-    });
+  constructor(private storage: Storage) { 
+    
   }
 
-  async deleteCar(id: number): Promise<any>{
-    let aux = await this.storage.get(CARS_KEY).filter(c => c.id != id);
-    return this.storage.set(CARS_KEY,aux);
+  async addCar(car: Car) {
+    let cars = await this.storage.get("my-items");
+    cars.push(car);
+    this.storage.set(CARS_KEY, cars);
+    return cars;
   }
-  getCars(): Promise<Car[]> {
-    return this.storage.get(CARS_KEY);
+
+  async deleteCar(id: number){
+    let cars = await this.storage.get("my-items");
+    cars = cars.filter(car => id != car.id);
+    this.storage.set(CARS_KEY, cars);
   }
-
-  updateCar(car: Car) {
-    return this.storage.get(CARS_KEY).then((cars: Car[]) => {
-      if (!cars || cars.length === 0) {
-        return null;
-      }
-
-      let newCars: Car[] = [];
-
-      for (let c of cars) {
-        if (c.id == car.id) {
-          newCars.push(car);
-        } else {
-          newCars.push(c);
-        }
-      }
-      return this.storage.set(CARS_KEY, newCars);
-    });
-
+  async getCars() {
+    let cars = await this.storage.get(CARS_KEY);
+    return cars;
   }
 }

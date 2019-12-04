@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,11 @@ export class HomePage {
   user: string;
   password: string;
 
-  constructor(private router: Router ,public toastController: ToastController) { }
+  constructor(private router: Router ,public toastController: ToastController, public storage: Storage) { }
+
+  ngOnInit(){
+    this.storage.set("my-items", []);
+  }
 
   checkPassword() {
     if ((this.password != null) && (this.user != null)) {
@@ -28,6 +33,8 @@ export class HomePage {
     } else {
       this.presentToastWithOptions();
     }
+    this.user ="";
+    this.password ="";
   }
   async presentToastWithOptions() {
     const toast = await this.toastController.create({
